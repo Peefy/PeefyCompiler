@@ -1,5 +1,5 @@
 
-CC=g++
+CC=gcc
 
 SRCS=./src/compiler.cpp
 
@@ -18,6 +18,5 @@ clean:
 	-rm -rf $(OBJS)
 run:
 	./$(EXEC)
-
-test:
+runtest:
 	./$(EXEC) $(TESTSRC)

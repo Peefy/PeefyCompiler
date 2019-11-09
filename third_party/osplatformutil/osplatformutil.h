@@ -17,7 +17,7 @@
      UNIX     - Any UNIX BSD/SYSV system
 */
 
-#define OS_PLATFORM_UTIL_VERSION 1.0.0.180723
+#define OS_PLATFORM_UTIL_VERSION "1.0.0.180723"
 
 // DARWIN
 #if defined(__APPLE__) && (defined(__GNUC__) || defined(__xlC__) || defined(__xlc__))
