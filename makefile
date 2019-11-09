@@ -15,7 +15,7 @@ start:$(OBJS)
 		$(CC) -o $@ -c $< -DMYLINUX
 .PHONY:clean
 clean:
-		-rm -rf $(OBJS)
+	-rm -rf $(OBJS)
 run:
 	./$(EXEC)
 

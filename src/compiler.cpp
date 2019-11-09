@@ -9,6 +9,9 @@
 #include "type.h"
 #include "symbol.h"
 
+#define NEXT_CMD_ARGV {argc--; argv++;}
+#define GET_ARGV (*argv)
+
 cmd_para_t para = {0};
 
 void next() {
@@ -24,14 +27,14 @@ void stmt() {
 }
 
 int main(int argc, char **argv) { 
-    argc--; argv++;
-    if (argc > 0 && **argv == '-' && (*argv)[1] == 's') {
+    NEXT_CMD_ARGV;
+    if (argc > 0 && GET_ARGV[0] == '-' && GET_ARGV[0] == 's') {
         para.src = 1;
-        --argc; ++argv;
+        NEXT_CMD_ARGV;
     }
-    if (argc > 0 && **argv == '-' && (*argv)[1] == 'd') {
+    if (argc > 0 && GET_ARGV[0] == '-' && GET_ARGV[1] == 'd') {
         para.debug = 1;
-        --argc; ++argv;
+        NEXT_CMD_ARGV;
     }
     if (argc < 1) {
         printf("Hello dugu complier! The version is %s\n", DUGU_VERSION);
