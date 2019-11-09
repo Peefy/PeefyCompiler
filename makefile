@@ -3,10 +3,12 @@ CC=g++
 
 SRCS=./src/compiler.cpp
 
+TESTSRC=./test/test.c
+
 OBJS=$(SRCS:.cpp=.o)
 
-EXEC=compiler
-all:start run 
+EXEC=dugu
+all:start run clean
 start:$(OBJS)
 		$(CC) -o $(EXEC) $(OBJS)
 .cpp.o:
@@ -16,3 +18,6 @@ clean:
 		-rm -rf $(OBJS)
 run:
 	./$(EXEC)
+
+test:
+	./$(EXEC) $(TESTSRC)
