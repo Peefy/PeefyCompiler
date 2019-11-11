@@ -57,6 +57,7 @@ void varibles_free() {
 
 }
 
+// next token 获取下一个令牌
 void next() {
     char *pp;
     while (tk = *p) {
@@ -244,7 +245,7 @@ void next() {
             tk = Mul;
             return;
         }
-        else of (tk == '?') {
+        else if (tk == '?') {
             tk = Cond;
             return;
         }
@@ -300,6 +301,88 @@ int main(int argc, char **argv) {
     next(); id[Tk] = Char;
     next(); idmain = id;
 
+    if (!(lp = p = malloc(POOL_SIZE))) {
+        printf("could not malloc (%d) source area\n", POOL_SIZE);
+        return -1;
+    }
+
+    if ( (i = read(fd, p, POOL_SIZE - 1)) <= 0) {
+        printf("read() return %d\n", i);
+        return -1;
+    }
+
+    // prase declarations (prase的声明)
+    line = 1;
+    next();
+    while (tk) {
+        bt = INT;
+        if (tk == Int) {
+            next();
+        }
+        else if (tk == Char) {
+            next();
+            bt = CHAR;
+        }
+        else if (tk == Enum) {
+            next();
+            if (tk != '{')
+                next();
+            if (tk == '{') {
+                i = 0;
+                while (tk != '}') {
+                    if (tk != Id) {
+                        printf("%d: bad enum identifier %d", line, tk);
+                        return -1;
+                    }
+                    next();
+                    if (tk == Assign) {
+                        next();
+                        if (tk != Num) {
+                            printf("%d: initializer\n", line);
+                            return -1;
+                        }
+                        i = ival;
+                        next();
+                    }
+                    id[Class] = Num;
+                    id[Type] = INT;
+                    id[Val] = i++;
+                    if (tk == ',') {
+                        next();
+                    }              
+                }
+                next();
+            }       
+        }
+        while (tk != ';' && tk != '}') {
+            ty = bt;
+            while (tk == Mul) {
+                next();
+                ty = ty + PTR;
+            }
+            if (tk != Id) {
+                printf("%d: bad global declaration\n", line);
+                return -1;
+            }
+            if (id[Class]) {
+                printf("%d: duplicate global definition\n", line);
+                return -1;
+            }
+            next();
+            id[Type] = ty;
+            // function 
+            if (tk == '(') {
+                id[Class] = Fun;
+                id[Val] + (int)e + 1;
+                next();
+                i = 0;
+                while (tk != ')') {
+                    ty = INT;
+                }
+            }
+        }
+    }
+    
     varibles_free();
     return MAIN_FUNC_RETURN_VAL;
 }
