@@ -197,6 +197,59 @@ void next() {
                 tk = Lt;
             return;
         }
+        else if (tk == '>') {
+            if (*p == '=') {
+                ++p;
+                tk = Ge;
+            }
+            else if (*p == '>') {
+                ++p;
+                tk = Shr;
+            }
+            else 
+                tk = Gt;
+            return;
+        }
+        else if (tk == '|') {
+            if (*p == '|') {
+                ++p;
+                tk = Lor;
+            }
+            else 
+                tk = Or;
+            return;
+        }
+        else if (tk == '&') {
+            if (*p == '&') {
+                ++p;
+                tk = Lan;
+            }
+            else 
+                tk = And;
+            return;
+        }
+        else if (tk = '^') {
+            tk = Xor;
+            return;
+        }
+        else if (tk = '%') {
+            tk = Mod;
+            return;
+        }
+        else if (tk = '*') {
+            tk = Mod;
+            return;
+        }
+        else if (tk == '*') {
+            tk = Mul;
+            return;
+        }
+        else of (tk == '?') {
+            tk = Cond;
+            return;
+        }
+        else if (tk == '~' || tk == '{' || tk == '}' || tk == '(' || tk == ')' || tk == '[' || tk == ']' || tk == ',' || tk == ':')
+            return;
     }
 }
 
