@@ -4,8 +4,8 @@
 
 typedef struct 
 {
-    int src;
-    int debug;
+    int src;    // print source and assembly flag
+    int debug;  // print executed instructions 
 }cmd_para_t;
 
 #endif
