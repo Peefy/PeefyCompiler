@@ -8,3 +8,9 @@
 * 代码优化
 
 **抽象语法树**
+
+**Learn Link**
+
+[Note1](https://ruslanspivak.com/lsbasi-part1/)
+
+[Note2](http://www.craftinginterpreters.com/)

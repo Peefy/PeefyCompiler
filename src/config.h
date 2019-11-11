@@ -7,4 +7,6 @@
 #define PARA_SRC "-s"
 #define PARA_DEBUG "-d"
 
+#define POOL_SIZE (256 * 1024)
+
 #endif

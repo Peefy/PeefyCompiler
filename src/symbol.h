@@ -27,19 +27,4 @@ enum {
     Tk, Hash, Name, Class, Type, Val, HClass, Htype, HVal, Idsz
 };
 
-// 字符是否是数字
-#define IS_DIGIT(c)       ((c) >= '0' && (c) <= '9') 
-// 字符是否是大写字母
-#define IS_UPPER_CHAR(c)  ((c) >= 'A' && (c) <= 'Z')
-// 字符是否是小写字母
-#define IS_LOWER_CHAR(c)  ((c) >= 'a' && (c) <= 'z')
-// 字符是否是英文字母
-#define IS_ALPHA(c)       (((c) >= 'a' && (c) <= 'z') || ((c) >= 'A' && (c) <= 'Z'))
-
-#define and &&
-#define or  ||
-#define xor ^
-#define bitand &
-#define bitor |
-
 #endif
