@@ -54,7 +54,11 @@ void varibles_malloc() {
 }
 
 void varibles_free() {
-
+    free(sym);
+    free(le);
+    free(e);
+    free(data);
+    free(sp);
 }
 
 // next token 获取下一个令牌
@@ -172,7 +176,7 @@ void next() {
         else if (tk == '-') {
             if (*p == '-') {
                 ++p;
-                tk = Dec
+                tk = Dec;
             }
             else
                 tk = Sub;
@@ -259,7 +263,85 @@ void expr() {
 }
 
 void stmt() {
-
+    int *a, *b;
+    if (tk == If) {
+        next();
+        if (tk == '(') 
+            next();
+        else {
+            printf("%d: open paren expected\n", line);
+            exit(0);
+        }
+        expr(Assign);
+        if (tk == ')')
+            next();
+        else {
+            printf("%d: close paren expected\n", line);
+            exit(0);
+        }
+        *++e = BZ;
+        b = ++e;
+        stmt();
+        if (tk == Else) {
+            *b = (int)(e + 3);
+            *++e = JMP;
+            b = ++e;
+            next();
+            stmt();
+        }
+    }
+    else if (tk == While) {
+        next();
+        a = e + 1;
+        if (tk == '(')
+            next();
+        else {
+            printf("%d: open paren expected\n", line);
+            exit(-1);
+        }
+        expr(Assign);
+        if (tk == '(')
+            next();
+        else {
+            printf("%d: close paren expected\n", line);
+            exit(-1);
+        }
+        *++e = BZ;
+        b = ++e;
+        *++e = JMP;
+        *++e = (int)a;
+        *b = (int)(e + 1);
+    }
+    else if (tk == Return) {
+        next();
+        if (tk != ';')
+            expr(Assign);
+        *++e = LEV;
+        if (tk == ';')
+            next();
+        else {
+            printf("%d: semicolon expected\n", line);
+            exit(-1);
+        }
+    }
+    else if (tk == '{') {
+        next();
+        while(tk != '}')
+            stmt();
+        next();
+    }
+    else if (tk == ';') {
+        next();
+    }
+    else {
+        expr(Assign);
+        if (tk == ';')
+            next();
+        else {
+            printf("%d: semicolon expected\n", line);
+            exit(-1);
+        }
+    }
 }
 
 int main(int argc, char **argv) { 
@@ -378,6 +460,77 @@ int main(int argc, char **argv) {
                 i = 0;
                 while (tk != ')') {
                     ty = INT;
+                    if (tk == Int) {
+                        next();
+                    }
+                    else if (tk == Char) {
+                        next();
+                        ty = CHAR;
+                    }
+                    while (tk == Mul) {
+                        next();
+                        ty = ty + PTR;
+                    }
+                    if (tk != Id) {
+                        printf("%d: bad parameter declaration\n", line);
+                        return -1;
+                    }
+                    if (id[Class] == Loc) {
+                        printf("%d: duplicate parameter definition\n", line);
+                        return -1;
+                    }
+                    id[HClass] = id[Class];
+                    id[Class] = Loc;
+                    id[Htype] = id[Type];
+                    id[Type] = ty;
+                    id[HVal] = id[Val];
+                    id[Val] = i++;
+                    next();
+                    if (tk == ',') {
+                        next();
+                    }
+                }
+                next();
+                if (tk != '{') {
+                    printf("bad function definition\n", line);
+                    return -1;
+                }
+                loc = ++i;
+                next();
+                while (tk == Int || tk == Char) {
+                    bt = (tk == Int) ? INT : CHAR;
+                    next();
+                    while (tk != ';') {
+                        ty = bt;
+                        while (tk != ';') {
+                            ty = bt;
+                            while (tk == Mul) {
+                                next();
+                                ty = ty + PTR;
+                            }
+                            if (id[Class] == Loc) {
+                                printf("%d: duplicate local definition\n", line);
+                                return -1;
+                            }
+                            id[HClass] = id[Class];
+                            id[Class] = Loc;
+                            id[Htype] = id[Type];
+                            id[Type] = ty;
+                            id[HVal] = id[Val];
+                            id[Val] = ++i;
+                            next();
+                            if (tk == ',') {
+                                next();
+                            }
+                        }
+                        next();
+                    }
+                    *++e = ENT;
+                    *++e = i - loc;
+                    while (tk != '}')
+                        stmt();
+                    *++e = LEV;
+                    id = sym; // unwind symbol table locals (展开本地符号表)
                 }
             }
         }
