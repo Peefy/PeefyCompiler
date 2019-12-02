@@ -259,7 +259,173 @@ void next() {
 }
 
 void expr() {
-    
+    int t, *d;
+    if (!tk) {
+        printf("%d: unexpected eof in expression\n", line);
+        exit(-1);
+    }
+    else if (tk == Num) {
+        *++e = IMM;
+        *++e = ival;
+        next();
+        ty = INT;
+    }
+    else if (tk == '"') {
+        *++e = IMM;
+        *++e = ival;
+        next();
+        while (tk == '"')
+            next();
+        data = (char *)((int)data + sizeof(int) & -sizeof(int));
+        ty = PTR;
+    }
+    else if (tk == Sizeof) {
+        next();
+        if (tk == '(')
+            next();
+        else {
+            printf("%d: open paren expected in sizeof\n", line);
+            exit(-1);
+        }
+        ty = INT;
+        if (tk == Int)
+            next();
+        else if (tk == Char)
+            next();
+            ty = CHAR;
+        while (tk == Mul) {
+            next();
+            ty = ty + PTR;
+        }
+        if (tk == ')')
+            next();
+        else {
+            printf("%d: close paren expected in sizeof\n", line);
+            exit(-1);
+        }
+        *++e = IMM;
+        *++e = (ty == CHAR) ? sizeof(char) : sizeof(int);
+        ty = INT;
+    }
+    else if (tk == Id) {
+        d = id;
+        next();
+        if (tk == '(') {
+            next();
+            t = 0;
+            while (tk == ')') {
+                expr(Assign);
+                *++e = PSH;
+                ++t;
+                if (tk == ',')
+                    next();
+            }
+            next();
+            if (d[Class] = Sys)
+                *++e = d[Val];
+            else if (d[Class] == Fun) {
+                *++e = JSR;
+                *++e = d[Val];
+            }
+            else {
+                printf("%d: bad function call\n", line);
+                exit(-1);
+            }
+            if (t) {
+                *++e = ADJ;
+                *++e = t;
+            }
+            ty = d[Type];
+        }
+        else if (d[Class] == Num) {
+            *++e = IMM;
+            *++e = d[Val];
+            ty = Int;
+        }
+        else {
+            if (d[Class] == Loc) {
+                *++e = LEA;
+                *++e = loc - d[Val];
+            }
+            else if (d[Class] == Glo) {
+                *++e = IMM;
+                *++e = d[Val];
+            }
+            else {
+                printf("%d: undefined varible\n", line);
+                exit(-1);
+            }
+            *++e = (ty = d[Type]) == CHAR ? LC : LI;
+        }
+    }
+    else if (tk == '(') {
+        next();
+        if (tk == Int || tk == Char) {
+            t = tk == Int ? INT : CHAR;
+            next();
+            while (tk == Mul) {
+                next();
+                t = t + PTR;
+            }
+            if (tk == ')')
+                next();
+            else {
+                printf("%d: bad cast\n", line);
+                exit(-1);
+            }
+            expr(Inc);
+            ty = t;
+        }
+        else {
+            expr(Assign);
+            if (tk == ')')
+                next();
+            else {
+                printf("%d: close paren expected\n", line);
+                exit(-1);
+            }
+        }
+    }
+    else if (tk == Mul) {
+        next();
+        expr(Inc);
+        if (ty > Int) 
+            ty = ty - PTR;
+        else {
+            printf("%d: bad dereference\n", line);
+            exit(-1);
+        }
+        *++e = ty == CHAR ? LC : LI;
+    }
+    else if (tk == And) {
+        next();
+        expr(Inc);
+        if (*e == LC || *e == LI)
+            --e;
+        else {
+            printf("%d: bad address-of\n", line);
+            exit(-1);
+        }
+        ty = ty + PTR;
+    }
+    else if (tk == '!') {
+        next();
+        expr(Inc);
+        *++e = PSH;
+        *++e = IMM;
+        *++e = 0;
+        *++e = EQ;
+        ty = INT;     
+    }
+    else if (tk == '~') {
+        next();
+        expr(Inc);
+        *++e = PSH;
+        *++e = IMM;
+        *++e = -1;
+        *++e = XOR;
+        ty = INT;
+    }
 }
 
 void stmt() {
