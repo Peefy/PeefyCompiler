@@ -26,7 +26,7 @@
 #define add +
 #define sub -
 
-#define MAIN_FUNC_RETURN_VAL (-1)
+#define MAIN_FUNC_RETURN_VAL -1
 
 #ifndef TRUE
 #define TRUE 1
