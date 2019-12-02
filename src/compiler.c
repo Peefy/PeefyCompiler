@@ -258,7 +258,7 @@ void next() {
     }
 }
 
-void expr() {
+void expr(int lev) {
     int t, *d;
     if (!tk) {
         printf("%d: unexpected eof in expression\n", line);
@@ -425,6 +425,273 @@ void expr() {
         *++e = -1;
         *++e = XOR;
         ty = INT;
+    }
+    else if (tk == Add) {
+        next();
+        expr(Inc);
+        ty = INT;
+    }
+    else if (tk == Sub) {
+        next();
+        *++e = IMM;
+        if (tk == Num) {
+            *++e = -ival;
+            next();
+        }
+        else {
+            *++e = -1;
+            *++e = PSH;
+            expr(Inc);
+            *++e = MUL;
+        }
+        ty = INT;
+    }
+    else if (tk == Inc || tk == Dec) {
+        t = tk;
+        next();
+        expr(Inc);
+        if (*e == LC) {
+            *e = PSH;
+            *++e = LI;
+        }
+        else {
+            printf("%d: bad lvalue in pre-increment\n", line);
+            exit(-1);
+        }
+        *++e = PSH;
+        *++e = IMM;
+        *++e = ty > PTR ? sizeof(int) : sizeof(char);
+        *++e = t == Inc ? ADD : SUB;
+        *++e = ty == CHAR ? SC : SI;
+    }
+    else {
+        printf("%d: bad expression\n", line);
+        exit(-1);
+    }
+
+    while (tk >= lev) {
+        // "precedence climbing" or "Top Down Operator Precedence" method
+        // “优先爬升”或“自上而下的操作员优先”方法
+        t = ty;
+        if (tk == Assign) {
+            next();
+            if (*e == LC || *e == LI) 
+                *e = PSH;
+            else {
+                printf("%d: bad lvalue in assignment\n", line);
+                exit(-1);
+            }
+            expr(Assign);
+            *++e = ((ty = t) == CHAR) ? SC : SI;
+        }
+        else if (tk == Cond) {
+            next();
+            *++e = BZ;
+            d = ++e;
+            expr(Assign);
+            if (tk == ':')
+                next();
+            else {
+                printf("%d: conditional missing colon\n", line);
+                exit(-1);
+            }
+            *d = (int)(e + 3);
+            *++e = JMP;
+            d = ++e;
+            expr(Cond);
+            *d = (int)(e + 1);
+        }
+        else if (tk == Lor) {
+            next();
+            *++e = BNZ;
+            d = ++e;
+            expr(Lan);
+            *d = (int)(e + 1);
+            ty = INT;
+        }
+        else if (tk == Lan) {
+            next();
+            *++e = BZ;
+            d = ++e;
+            expr(Or);
+            *d = (int)(e + 1);
+        }
+        else if (tk == Or) {
+            next();
+            *++e = PSH;
+            expr(And);
+            *++e = XOR;
+            ty = INT;
+        }
+        else if (tk == And) {
+            next();
+            *++e = PSH;
+            expr(Eq);
+            *++e = AND;
+            ty = INT;
+        }
+        else if (tk == Eq) {
+            next();
+            *++e = PSH;
+            expr(Lt);
+            *++e = EQ;
+            ty = INT;
+        }
+        else if (tk == Ne) {
+            next();
+            *++e = PSH;
+            expr(Lt);
+            *++e = NE;
+            ty = INT;
+        }
+        else if (tk == Lt) {
+            next();
+            *++e = PSH;
+            expr(Shl);
+            *++e = LT;
+            ty = INT;
+        }
+        else if (tk == Le) {
+            next();
+            *++e = PSH;
+            expr(Shl);
+            *++e = LE;
+            ty = INT;
+        }
+        else if (tk == Ge) {
+            next();
+            *++e = PSH;
+            expr(Shl);
+            *++e = GE;
+            ty = INT;
+        }
+        else if (tk == Shl) {
+            next();
+            *++e = PSH;
+            expr(Add);
+            *++e = SHL;
+            ty = INT;
+        }
+        else if (tk == Shr) {
+            next();
+            *++e = PSH;
+            expr(Add);
+            *++e = SHR;
+            ty = INT;
+        }
+        else if (tk == Add) {
+            next();
+            *++e = PSH;
+            expr(Mul);
+            if ( (ty = t) > PTR) {
+                *++e = PSH;
+                *++e = IMM;
+                *++e = sizeof(int);
+                *++e = MUL;
+            }
+            *++e = ADD;
+        }
+        else if (tk == Sub) {
+            next();
+            *++e = PSH;
+            expr(Mul);
+            if (t > PTR && t == ty) {
+                *++e = SUB;
+                *++e = PSH;
+                *++e = IMM;
+                *++e = sizeof(int);
+                *++e = DIV;
+                ty = INT;
+            }
+            else if ( (ty = t) > PTR ) {
+                *++e = PSH;
+                *++e = IMM;
+                *++e = sizeof(int);
+                *++e = MUL;
+                *++e = SUB;
+            }
+            else 
+                *++e = SUB;
+        }
+        else if (tk == Mul) {
+            next();
+            *++e = PSH;
+            expr(Inc);
+            *++e = MUL;
+            ty = INT;
+        }
+        else if (tk == Div) {
+            next();
+            *++e = PSH;
+            expr(Inc);
+            *++e = DIV;
+            ty = INT;
+        }
+        else if (tk == Mod) {
+            next();
+            *++e = PSH;
+            expr(Inc);
+            *++e = MOD;
+            ty = INT;
+        }
+        else if (tk == Mod) {
+            next();
+            *++e = PSH;
+            expr(Inc);
+            *++e = MOD;
+            ty = INT;
+        }
+        else if (tk == Inc || tk == Dec) {
+            if (*e == LC) {
+                *e = PSH;
+                *++e = LC;
+            }
+            else if (*e == LI) {
+                *e = PSH;
+                *++e = LI;
+            }
+            else {
+                printf("%d: bad lvalue in post-increment\n", line);
+                exit(-1);
+            }
+            *++e = PSH;
+            *++e = IMM;
+            *++e = (ty > PTR) ? sizeof(int) : sizeof(char);
+            *++e = (tk == Inc) ? ADD : SUB;
+            *++e = (ty == CHAR) ? SC : SI;
+            *++e = PSH;
+            *++e = IMM;
+            *++e = (ty > PTR) ? sizeof(int) : sizeof(char);
+            *++e = (tk == Inc) ? SUB : ADD;
+            next();        
+        }
+        else if (tk == Brak) {
+            next();
+            *++e = PSH;
+            expr(Assign);
+            if (tk == ']')
+                next();
+            else {
+                printf("%d: close bracket expected\n", line);
+                exit(-1);
+            }
+            if (t > PTR) {
+                *++e = PSH;
+                *++e = IMM;
+                *++e = sizeof(int);
+                *++e = MUL;      
+            }
+            else if (t < PTR) {
+                printf("%d: pointer type expected\n", line);
+                exit(-1);
+            }
+            *++e = ADD;
+            *++e = ((ty = t - PTR) == CHAR) ? LC : LI;
+        }
+        else {
+            printf("%d: complier error tk=%d\n", line, tk);
+            exit(-1);
+        }
     }
 }
 
