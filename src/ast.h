@@ -2,13 +2,17 @@
 #ifndef __AST_H_
 #define __AST_H_
 
+#include <vector>
+
+using namespace std;
+
 class AstTreeNode
 {
 private:
     
 public:
     AstTreeNode() = default;
-    virtual ~AstTreeNode();
+    virtual ~AstTreeNode() = default;
 };
 
 
@@ -18,7 +22,17 @@ private:
     
 public:
     AstTree() = default;
-    virtual ~AstTree();
+    AstTree(AstTree& ohther) = default;
+    AstTree& operator=(AstTree& ohther) = default;
+    virtual ~AstTree() = default;
+private:
+    bool _isAbstract;
+public:
+    AstTreeNode* root;
+    vector<AstTreeNode*> nodes;
+    void inOrder() {
+        
+    }
 };
 
 
