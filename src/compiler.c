@@ -63,6 +63,7 @@ void varibles_free() {
     free(sp);
 }
 
+// 词法分析器，下一个记号token
 void next()
 {
   char *pp;
@@ -295,6 +296,7 @@ void next()
   }
 }
 
+// 表达式
 void expr(int lev)
 {
   int t, *d;
@@ -820,6 +822,7 @@ void expr(int lev)
   }
 }
 
+// 语句
 void stmt()
 {
   int *a, *b;
@@ -919,6 +922,7 @@ void stmt()
   }
 }
 
+// 主函数
 int main(int argc, char **argv) { 
     int fd, bt, ty, *idmain;
     int i, *t;  

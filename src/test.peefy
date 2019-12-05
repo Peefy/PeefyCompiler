@@ -1,0 +1,28 @@
+
+require('io');
+require('math');
+
+from 'io' import print;
+
+export def hello() {
+    io.print('hello');
+}
+
+override def print(a : ...) {
+
+}
+
+def main (argc : int, argv : string[]) : int {
+    io.print('hello peefy code');
+    var fun_val = def fun_name (a : int) : void {
+        io.print(a);
+        return 1;
+    };
+    var fun = (a : int) : void -> {
+        io.print(a);
+        return 1;
+    }
+    io.print(math.sin(2.3f) + '\n');
+    io.print('abc' + 'cba');
+    return 1;
+}
