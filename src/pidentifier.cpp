@@ -60,10 +60,13 @@ static unordered_set<PKeyword> symbolTable = {
       PKeyword("try"),
       PKeyword("catch"),
       PKeyword("throw"),
-
       PKeyword("raise"),
       PKeyword("except"),
       PKeyword("error"),
-      PKeyword("operator"),
+      PKeyword("operator")
 
+};
+
+inline bool is_in_table(string& id) {
+      return symbolTable.find(PKeyword(id)) != symbolTable.end();
 }
