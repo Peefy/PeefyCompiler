@@ -44,5 +44,14 @@ private:
 
 };
 
+class SymbolTable
+{
+private:
+    /* data */
+public:
+    SymbolTable() = default;
+    virtual ~SymbolTable() = default;
+};
+
 
 #endif

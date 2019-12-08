@@ -25,9 +25,20 @@ private:
 struct PKeyword : public PIdentifier<string>
 {
 public:
-
+    PKeyword(string val) {
+        this->value = val;
+    } 
+public:
+    inline bool operator== (PKeyword& other) {
+        return this->value == other.value;
+    }
+    inline bool operator!= (PKeyword& other) {
+        return this->value != other.value;
+    }
+    inline int compare(PKeyword& other) {
+        return strcmp(this->value.c_str(), other.value.c_str());
+    }
 private:
-
 };
 
 
