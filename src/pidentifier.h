@@ -25,10 +25,10 @@ private:
 struct PKeyword : public PIdentifier<string>
 {
 public:
-    PKeyword(string& val) noexcept {
+    explicit PKeyword(string& val) noexcept {
         this->value = val;
     }
-    PKeyword(string&& val) noexcept {
+    explicit PKeyword(string&& val) noexcept {
         this->value = val;
     }  
 private:

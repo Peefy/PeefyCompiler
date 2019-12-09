@@ -4,9 +4,6 @@
 
 #include "util.h"
 
-//    Num = 128, Fun, Sys, Glo, Loc, Id,
-//    Char, Else, Enum, If, Int, Return, Sizeof, While, 
-//    Assign, Cond, Lor, Lan, Or, Xor, And, Eq, Ne, Lt, Gt, Le, Ge, Shl, Shr, Add, Sub, Mul, Div, Mod, Inc, Dec, Brak
 
 #include <string>
 
@@ -14,6 +11,7 @@ using namespace std;
 
 BEGIN_PEEFY_NAMESPACE
 
+// 记号类型
 enum class PTokenType {
     // 错误，什么都不是
     None = -1, 
@@ -114,6 +112,7 @@ enum class PTokenType {
     Sizeof,
 };
 
+// 语义信息
 struct SemInfo {
     double r;
     int i;
@@ -121,6 +120,7 @@ struct SemInfo {
     int value;
 };
 
+// 词法分析的记号
 template<typename T>
 struct PToken {
 public:
@@ -139,14 +139,7 @@ private:
 
 using PTokenValue = PToken<SemInfo>;
 
-class SymbolTable
-{
-private:
-    /* data */
-public:
-    SymbolTable() = default;
-    virtual ~SymbolTable() = default;
-};
+
 
 END_PEEFY_NAMESPACE
 
