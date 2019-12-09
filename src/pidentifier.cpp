@@ -1,12 +1,14 @@
 
 #include "pidentifier.h"
 
+// 关键字标识符，变量的命名不能与标识符重合
 static char* keywords = "char else enum if int return sizeof while for do switch case"
       "open read close printf malloc free memset memcmp exit void main "
       "var auto where in out typedef typename nameof string "
       "float double uint uint8 uint16 uint32 uint64 int8 int16 int32 int64 float32 float64"
       "try catch throw raise except error operator";
 
+// 符号表
 static unordered_set<PKeyword> symbolTable = {
       PKeyword("char"), 
       PKeyword("else"), 

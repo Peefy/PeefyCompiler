@@ -976,6 +976,7 @@ int main(int argc, char **argv) {
         return -1;
     }
 
+    // 读取文件词素流
     printf("read code...\n");
     if ( (i = read(fd, p, POOL_SIZE - 1)) <= 0) {
         printf("read() return %d\n", i);
@@ -984,7 +985,7 @@ int main(int argc, char **argv) {
     p[i] = 0;
     close(fd);
 
-    // prase declarations (prase的声明)
+    // prase declarations (prase的声明) 语法分析器
     printf("prase code...\n");
     line = 1;
     next();
@@ -1141,6 +1142,7 @@ int main(int argc, char **argv) {
         next();
     } 
 
+    // 查找是否存在程序运行的起点 main() 函数
     if (!(pc = (int *)idmain[Val])) {
         printf("main() not defined\n");
         return -1;
@@ -1158,7 +1160,7 @@ int main(int argc, char **argv) {
     *--sp = (int)argv;
     *--sp = (int)t;
 
-    // run compile code...
+    // run compile code in vm...
     printf("run code...\n");
     while(1) {
         i = *pc++;
