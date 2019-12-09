@@ -22,7 +22,7 @@ private:
 };
 
 struct PObject : public PObjcetBase<int> {
-
+    
 };
 
 #endif

@@ -1,6 +1,6 @@
 
-#ifndef __SYMBOL_H_
-#define __SYMBOL_H_
+#ifndef __SYMBOL_H__
+#define __SYMBOL_H__
 
 
 // tokens and classes 标记和类（运算符放在最后且按优先级顺序排列）

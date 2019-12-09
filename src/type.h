@@ -1,6 +1,6 @@
 
-#ifndef __TYPE_H_
-#define __TYPE_H_
+#ifndef __TYPE_H__
+#define __TYPE_H__
 
 typedef struct 
 {

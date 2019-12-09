@@ -2,6 +2,8 @@
 #ifndef __P_TOKEN_H__
 #define __P_TOKEN_H__
 
+#include "util.h"
+
 //    Num = 128, Fun, Sys, Glo, Loc, Id,
 //    Char, Else, Enum, If, Int, Return, Sizeof, While, 
 //    Assign, Cond, Lor, Lan, Or, Xor, And, Eq, Ne, Lt, Gt, Le, Ge, Shl, Shr, Add, Sub, Mul, Div, Mod, Inc, Dec, Brak
@@ -10,11 +12,13 @@
 
 using namespace std;
 
+BEGIN_PEEFY_NAMESPACE
+
 enum class PTokenType {
     // 错误，什么都不是
-    None = 256, 
+    None = -1, 
     // 标识符 (变量名、数组名、函数名等)
-    Identifier,
+    Identifier = 257,
     // 数字(整数)
     Integer,
     // 数字(浮点数)
@@ -128,6 +132,7 @@ public:
 public:
     PTokenType type;
     T value;
+    bool isSingleByteSymbol;
 private:
 
 };
@@ -143,5 +148,6 @@ public:
     virtual ~SymbolTable() = default;
 };
 
+END_PEEFY_NAMESPACE
 
 #endif

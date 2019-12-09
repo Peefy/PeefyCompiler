@@ -11,7 +11,7 @@ using namespace std;
 template<typename T>
 struct PIdentifier {
 public:
-    PIdentifier() noexcept = default;
+    constexpr PIdentifier() noexcept = default;
     virtual ~PIdentifier() noexcept = default;
     constexpr PIdentifier(PIdentifier& token) noexcept = default;
     constexpr PIdentifier& operator=(PIdentifier& token) noexcept = default;
@@ -25,9 +25,14 @@ private:
 struct PKeyword : public PIdentifier<string>
 {
 public:
-    PKeyword(string val) {
+    PKeyword(string& val) noexcept {
         this->value = val;
-    } 
+    }
+    PKeyword(string&& val) noexcept {
+        this->value = val;
+    }  
+private:
+    PKeyword() = default;
 public:
     inline bool operator== (PKeyword& other) {
         return this->value == other.value;

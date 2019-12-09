@@ -2,6 +2,7 @@
     "files.associations": {
         "stdint.h": "c",
         "vector": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "unordered_set": "cpp"
     }
 }
