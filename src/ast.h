@@ -1,6 +1,6 @@
 
-#ifndef __AST_H_
-#define __AST_H_
+#ifndef __AST_H__
+#define __AST_H__
 
 #include <vector>
 

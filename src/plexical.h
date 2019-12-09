@@ -4,6 +4,10 @@
 
 #include "ptoken.h"
 
+#include "util.h"
+
+BEGIN_PEEFY_NAMESPACE
+
 class PlexicalState
 {
 private:
@@ -20,6 +24,10 @@ public:
     string source;  // 当前源名称
     string enbn;  // 环境变量名称
 };
+
+END_PEEFY_NAMESPACE
+
+
 
 
 #endif

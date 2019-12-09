@@ -1,5 +1,6 @@
 
 require('io');
+require('os')
 require('math');
 
 from 'io' import print;

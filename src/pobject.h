@@ -5,7 +5,11 @@
 #include <stdint.h>
 #include <string>
 
+#include "util.h"
+
 using namespace std;
+
+BEGIN_PEEFY_NAMESPACE
 
 template <typename T>
 struct PObjcetBase {
@@ -22,7 +26,12 @@ private:
 };
 
 struct PObject : public PObjcetBase<int> {
-    
+private:
+    PObject* next;
 };
+
+END_PEEFY_NAMESPACE
+
+
 
 #endif

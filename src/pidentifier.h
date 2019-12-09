@@ -6,7 +6,12 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "util.h"
+
 using namespace std;
+
+BEGIN_PEEFY_NAMESPACE
+
 
 template<typename T>
 struct PIdentifier {
@@ -47,5 +52,6 @@ private:
 };
 
 
+END_PEEFY_NAMESPACE
 
 #endif

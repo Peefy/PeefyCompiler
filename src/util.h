@@ -18,7 +18,7 @@
 #define IS_NEW_LINE(c)    ((c) == '\n' || (c) == '\r')
 // 是否是空白字符
 #define IS_WHITE_SPACE(c) ((c) == ' ' || (c) == '\f' || (c) == '\t' || (c) == '\v')
-
+// 求数组的大小
 #define ARR_SIZE(arr)     (sizeof(arr) / sizeof(arr[0]))
 
 #define and &&

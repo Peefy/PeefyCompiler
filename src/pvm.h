@@ -2,6 +2,10 @@
 #ifndef __P_VM_H__
 #define __P_VM_H__
 
+#include "util.h"
+
+BEGIN_PEEFY_NAMESPACE
+
 enum class PVMCommandType {
     LEA ,
     IMM ,
@@ -54,6 +58,10 @@ public:
 public:
     PVMCommandType command;
 };
+
+END_PEEFY_NAMESPACE
+
+
 
 
 #endif
