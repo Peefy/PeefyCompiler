@@ -7,6 +7,7 @@
 #include <unordered_set>
 
 #include "util.h"
+#include "psymtable.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ public:
 public:
     T value;
 private:
-
+    
 };
 
 struct PKeyword : public PIdentifier<string>
@@ -51,6 +52,7 @@ public:
 private:
 };
 
+using SymbolTable = SymbolTableBase<peefy::SymbolTableEntry, peefy::PKeyword>;
 
 END_PEEFY_NAMESPACE
 
