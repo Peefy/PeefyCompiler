@@ -1,6 +1,8 @@
 
 #include "pidentifier.h"
 
+#include <regex>
+
 BEGIN_PEEFY_NAMESPACE
 
 // 关键字标识符，变量的命名不能与标识符重合
@@ -16,18 +18,7 @@ static const char* const keywords[] = {
 };
 
 // 符号表
-static unordered_set<PKeyword> symbolTable; 
 
-void build_table(unordered_set<PKeyword>& table) {
-    table.clear();
-    for (const auto & key : keywords) {
-          table.insert(PKeyword(key));
-    }
-}
-
-inline bool is_in_table(string& id) {
-    return symbolTable.find(PKeyword(id)) != symbolTable.end();
-}
 
 
 END_PEEFY_NAMESPACE
