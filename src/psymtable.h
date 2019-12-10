@@ -24,11 +24,9 @@ class SymbolTableBase
 {
 public:
 
-	static_assert(std::is_convertible<_TableValue, SymbolTableEntry>::value)
-
 	using tablebval_type = _TableValue;
 	using symbol_type = _SymbolValue;
-	typedef self_type = SymbolTableBase<tablebval_type, symbol_type>;
+	using self_type = SymbolTableBase<tablebval_type, symbol_type>;
 	typedef shared_ptr<SymbolTableBase<tablebval_type, symbol_type> > Ptr;
 private:
 	unordered_set<string> _table;
