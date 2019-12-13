@@ -8,6 +8,24 @@
 
 BEGIN_PEEFY_NAMESPACE
 
+class POperator
+{
+private:
+    
+public:
+    POperator() = default;
+    virtual ~POperator() = default;
+};
+
+POperator::POperator()
+{
+}
+
+POperator::~POperator()
+{
+}
+
+
 END_PEEFY_NAMESPACE
 
 #endif

@@ -15,6 +15,7 @@ OBJS_PEEFY=$(SRCS_PEEFY:.cpp=.o)
 EXEC=dugu
 EXEC_C4=c4
 EXEC_PEEFY=peefy
+
 all:start run clean
 peefy:peefyc peefyr
 start:$(OBJS)

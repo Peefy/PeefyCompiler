@@ -61,9 +61,24 @@ public:
     PVMCommandType command;
 };
 
+class PVirtulMachine
+{
+private:
+    /* data */
+public:
+    PVirtulMachine(/* args */);
+    PVirtulMachine();
+};
+
+PVirtulMachine::PVirtulMachine(/* args */)
+{
+}
+
+PVirtulMachine::PVirtulMachine()
+{
+}
+
+
 END_PEEFY_NAMESPACE
-
-
-
 
 #endif
