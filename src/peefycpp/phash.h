@@ -1,6 +1,8 @@
 
-#ifndef __P_OPERATOR_H__
-#define __P_OPERATOR_H__
+#ifndef __P_HASH_H__
+#define __P_HASH_H__
+
+// peefy 哈希hash库
 
 #include "util.h"
 

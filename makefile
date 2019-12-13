@@ -1,7 +1,7 @@
 
 CC=gcc
 
-SRCS=./src/compiler.c
+SRCS=./src/peefyc4/compiler.c
 
 SRCS_C4=./third_party/c4/c4.c
 

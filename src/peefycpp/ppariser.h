@@ -2,6 +2,8 @@
 #ifndef __P_PARISER_H__
 #define __P_PARISER_H__
 
+// peefy 语法分析器
+
 #include "util.h"
 
 BEGIN_PEEFY_NAMESPACE

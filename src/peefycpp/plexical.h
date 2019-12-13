@@ -2,12 +2,15 @@
 #ifndef __P_LEXICAL_H__
 #define __P_LEXICAL_H__
 
+// peefy 词法分析器
+
 #include "ptoken.h"
 
 #include "util.h"
 
 BEGIN_PEEFY_NAMESPACE
 
+// 词法分析状态机
 class PlexicalState
 {
 private:

@@ -1,6 +1,8 @@
 
-#ifndef __P_HASH_H__
-#define __P_HASH_H__
+#ifndef __P_MATH_H__
+#define __P_MATH_H__
+
+// peefy 数学库
 
 #include "util.h"
 

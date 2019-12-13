@@ -2,6 +2,8 @@
 #ifndef __P_OBJECT_H__
 #define __P_OBJECT_H__
 
+// peefy 对象库
+
 #include <stdint.h>
 #include <string>
 

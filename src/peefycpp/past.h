@@ -1,10 +1,16 @@
 
-#ifndef __AST_H__
-#define __AST_H__
+#ifndef __P_AST_H__
+#define __P_AST_H__
+
+// peefy 抽象语法树AST库
+
+#include "util.h"
 
 #include <vector>
 
 using namespace std;
+
+BEGIN_PEEFY_NAMESPACE
 
 class AstTreeNode
 {
@@ -31,11 +37,10 @@ public:
     AstTreeNode* root;
     vector<AstTreeNode*> nodes;
     void inOrder() {
-        
+        return;
     }
 };
 
-
-
+END_PEEFY_NAMESPACE
 
 #endif

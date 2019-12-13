@@ -1,6 +1,8 @@
 
-#ifndef __P_STMT_H__
-#define __P_STMT_H__
+#ifndef __P_GC_H__
+#define __P_GC_H__
+
+// peefy 垃圾回收器GC库
 
 #include "util.h"
 

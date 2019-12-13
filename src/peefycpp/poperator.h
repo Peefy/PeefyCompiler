@@ -1,6 +1,8 @@
 
-#ifndef __P_FUNCTION_H__
-#define __P_FUNCTION_H__
+#ifndef __P_OPERATOR_H__
+#define __P_OPERATOR_H__
+
+// peefy 操作符库
 
 #include "util.h"
 

@@ -2,6 +2,8 @@
 #ifndef __P_VM_H__
 #define __P_VM_H__
 
+// peefy 虚拟机
+
 #include "util.h"
 
 BEGIN_PEEFY_NAMESPACE

@@ -2,6 +2,8 @@
 #ifndef __P_TOKEN_H__
 #define __P_TOKEN_H__
 
+// peefy 标识符
+
 #include <string>
 #include <unordered_map>
 #include <unordered_set>

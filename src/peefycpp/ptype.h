@@ -1,6 +1,8 @@
 
-#ifndef __P_ERROR_H__
-#define __P_ERROR_H__
+#ifndef __P_TYPE_H__
+#define __P_TYPE_H__
+
+// peefy 类型推导库
 
 #include "util.h"
 

@@ -2,6 +2,8 @@
 #ifndef __P_SYMBOL_TABLE_H__
 #define __P_SYMBOL_TABLE_H__
 
+// peefy 符号表库
+
 #include <string>
 #include <memory>
 #include <mutex>
