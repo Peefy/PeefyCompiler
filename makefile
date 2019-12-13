@@ -4,6 +4,7 @@ CC=gcc
 SRCS=./src/peefyc4/compiler.c
 SRCS_C4=./third_party/c4/c4.c
 SRCS_PEEFY=./src/peefycpp/peefy.cpp
+SRCS_PEEFY_GO=./src/peefygo/peefy.go
 
 TESTSRC=./test/test.c
 
@@ -35,4 +36,6 @@ peefyc:$(OBJS_PEEFY)
 		g++ -o $(EXEC_PEEFY) $(OBJS_PEEFY)
 peefyr:
 	./$(EXEC_PEEFY)
+peefygo:
+	go run $(SRCS_PEEFY_GO)
 
