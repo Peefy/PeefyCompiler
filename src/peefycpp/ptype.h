@@ -8,6 +8,11 @@
 
 BEGIN_PEEFY_NAMESPACE
 
+enum class PType
+{
+    
+};
+
 END_PEEFY_NAMESPACE
 
 #endif

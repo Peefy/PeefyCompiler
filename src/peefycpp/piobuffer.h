@@ -46,10 +46,11 @@ PIOBuffer::~PIOBuffer()
 class PFileBuffer : public PIOBuffer
 {
 private:
-    /* data */
+    char _nextchar;
 public:
-    PFileBuffer(/* args */);
+    PFileBuffer() : _nextchar('\0') {}
     ~PFileBuffer();
+    char nextChar();
 };
 
 PFileBuffer::PFileBuffer(/* args */)

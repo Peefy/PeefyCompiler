@@ -4,9 +4,13 @@
 
 // peefy 词法分析器
 
-#include "ptoken.h"
+/*
+* 状态机:
+* 状态转移图:
+*/
 
 #include "util.h"
+#include "ptoken.h"
 
 BEGIN_PEEFY_NAMESPACE
 
