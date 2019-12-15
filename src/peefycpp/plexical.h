@@ -18,9 +18,9 @@ BEGIN_PEEFY_NAMESPACE
 class PlexicalState
 {
 private:
-    /* data */
+    
 public:
-    PlexicalState(/* args */);
+    PlexicalState();
     ~PlexicalState();
 public:
     int current_char;
@@ -30,6 +30,8 @@ public:
     PTokenValue lookahead;  // 
     string source;  // 当前源名称
     string enbn;  // 环境变量名称
+public:
+    PTokenValue nextToken();
 };
 
 END_PEEFY_NAMESPACE

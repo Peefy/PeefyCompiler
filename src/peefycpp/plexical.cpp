@@ -7,12 +7,19 @@
 
 BEGIN_PEEFY_NAMESPACE
 
-PlexicalState::PlexicalState(/* args */)
+PlexicalState::PlexicalState()
 {
 }
 
 PlexicalState::~PlexicalState()
 {
+}
+
+PTokenValue PlexicalState::nextToken() {
+    while (true) {
+        break;
+    }
+    return PTokenValue();
 }
 
 END_PEEFY_NAMESPACE
