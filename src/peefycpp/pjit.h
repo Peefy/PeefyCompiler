@@ -2,7 +2,7 @@
 #ifndef __P_JIT_H__
 #define __P_JIT_H__
 
-// peefy 哈希hash库
+// peefy JIT编译(just-in-time compilation)
 
 #include "util.h"
 
