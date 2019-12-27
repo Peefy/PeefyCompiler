@@ -3,6 +3,19 @@
 
 #include <regex>
 
+#define IS_ID_START_CHAR(c) (\
+              (c >= 'a' && c <= 'z')\
+               || (c >= 'A' && c <= 'Z')\
+               || c == '_'\
+               || (c >= 128))
+
+#define IS_ID_CHAR(c) (\
+              (c >= 'a' && c <= 'z')\
+               || (c >= 'A' && c <= 'Z')\
+               || (c >= '0' && c <= '9')\
+               || c == '_'\
+               || (c >= 128))
+
 BEGIN_PEEFY_NAMESPACE
 
 // 关键字标识符，变量的命名不能与标识符重合

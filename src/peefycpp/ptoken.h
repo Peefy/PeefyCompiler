@@ -40,7 +40,7 @@ enum class PTokenType {
     Comment,
     // 空白
     WhiteSpace,
-    // 赋值
+    // 赋值 = 
     Assign,
     // 函数
     Function,
@@ -136,11 +136,64 @@ public:
     bool isSingleByteSymbol;
 private:
 
+public:
+    static PTokenType OneChar(int c1);
+    static PTokenType TwoChar(int c1, int c2);
+    static PTokenType ThreeChar(int c1, int c2, int c3);
+    static PTokenType FromChars(int * chars, int n);
 };
 
+template<typename T>
+PTokenType PToken<T>::OneChar(int c1)
+{
+    PTokenType type = PTokenType::None;
+    switch (c1)
+    {
+    case '=':
+        type = PTokenType::Assign;
+        break; 
+    default:
+        type = PTokenType::Assign;
+        break;
+    }
+    return type;
+}
+
+template<typename T>
+PTokenType PToken<T>::TwoChar(int c1, int c2)
+{
+    return PTokenType::None;
+}
+
+template<typename T>
+PTokenType PToken<T>::ThreeChar(int c1, int c2, int c3)
+{
+    return PTokenType::None;
+}
+
+template<typename T>
+PTokenType PToken<T>::FromChars(int * chars, int n)
+{
+    PTokenType type = PTokenType::None;
+    switch (n)
+    {
+    case 0:
+        type = PToken<T>::OneChar(chars[0]);
+        break;
+    case 1:
+        type = PToken<T>::TwoChar(chars[0], chars[1]);
+        break;
+    case 2:
+        type = PToken<T>::ThreeChar(chars[0], chars[1], chars[2]);
+        break;
+    default:
+        return PTokenType::None;
+        break;
+    }
+    return type;
+}
+
 using PTokenValue = PToken<SemInfo>;
-
-
 
 END_PEEFY_NAMESPACE
 

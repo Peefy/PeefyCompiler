@@ -296,7 +296,7 @@ void next()
   }
 }
 
-// 表达式
+// 表达式expr,判断语句if，for，while执行的语句
 void expr(int lev)
 {
   int t, *d;
@@ -822,7 +822,7 @@ void expr(int lev)
   }
 }
 
-// 语句
+// 语句stmt 正常执行的语句
 void stmt()
 {
   int *a, *b;
