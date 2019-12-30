@@ -4,10 +4,18 @@
 
 // Peefy Compiler C API
 
+#include "util.h"
+
+#define PEEFY_API_DECLARE 
+
 extern "C" 
 {
 
+PEEFY_API_DECLARE int peefy_init();
 
+PEEFY_API_DECLARE 
+
+PEEFY_API_DECLARE 
 
 }
 
