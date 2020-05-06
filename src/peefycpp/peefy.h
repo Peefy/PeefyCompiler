@@ -1,0 +1,11 @@
+
+#ifndef __PEEFY_H__
+#define __PEEFY_H__
+
+#define PEEFY_MAJOR_VERSION   "0"
+#define PEEFY_MINOR_VERSION   "0"
+#define PEEFY_RELEASE_VERSION "1"
+
+#define PEEFY_VERSION "v" PEEFY_MAJOR_VERSION "." PEEFY_MINOR_VERSION "." PEEFY_RELEASE_VERSION
+
+#endif

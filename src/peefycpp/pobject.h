@@ -13,12 +13,21 @@ using namespace std;
 
 BEGIN_PEEFY_NAMESPACE
 
+struct PObject {
+public:
+    PObject* next;
+    int intpreter;
+    bool isMarked;
+private:
+    int _private_count;
+};
+
 template <typename T>
-struct PObjcetBase {
+struct PObjcetWithT : public PObject {
 public:
     uint64_t refrence_count;
     uint64_t hashval;
-    constexpr PObjcetBase() : 
+    constexpr PObjcetWithT() : 
         refrence_count(0),  
         hashval(0) {
 
